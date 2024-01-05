@@ -1,14 +1,31 @@
 package com.proyecto.ecommerce.model;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name = "details")
 public class orderDetail {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String name;
 	private double quantity;
 	private double price;
 	private double total;
+
+	@OneToOne
+	private order order;
+	
+	@ManyToOne
+	private product product;
 	
 	public orderDetail() {
-		// TODO Auto-generated constructor stub
 	}
 
 	public orderDetail(Integer id, String name, double quantity, double price, double total) {
@@ -58,6 +75,24 @@ public class orderDetail {
 
 	public void setTotal(double total) {
 		this.total = total;
+	}
+
+	
+	
+	public order getOrder() {
+		return order;
+	}
+
+	public void setOrder(order order) {
+		this.order = order;
+	}
+
+	public product getProduct() {
+		return product;
+	}
+
+	public void setProduct(product product) {
+		this.product = product;
 	}
 
 	@Override

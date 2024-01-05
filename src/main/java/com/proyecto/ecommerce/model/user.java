@@ -1,6 +1,19 @@
 package com.proyecto.ecommerce.model;
 
+import java.util.List;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name = "users")
 public class user {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String name;
 	private String username;
@@ -10,8 +23,13 @@ public class user {
 	private String usertype;
 	private String password;
 	
+	@OneToMany(mappedBy = "user")
+	private List<product> products;
+	
+	@OneToMany(mappedBy = "user")
+	private List<order> orders;
+	
 	public user() {
-		// TODO Auto-generated constructor stub
 	}
 	
 	public user(Integer id, String name, String username, String email, String address, String telephone,
@@ -76,6 +94,27 @@ public class user {
 		this.password = password;
 	}
 
+	
+	@OneToMany(mappedBy = "usuario")
+	public List<product> getProducts() {
+		return products;
+	}
+
+	@OneToMany(mappedBy = "usuario")
+	public List<order> getOrders() {
+		return orders;
+	}
+
+	public void setOrders(List<order> orders) {
+		this.orders = orders;
+	}
+
+	public void setProducts(List<product> products) {
+		this.products = products;
+	}
+
+	
+	
 	@Override
 	public String toString() {
 		return "user [id=" + id + ", name=" + name + ", username=" + username + ", email=" + email + ", address="

@@ -2,15 +2,33 @@ package com.proyecto.ecommerce.model;
 
 import java.util.Date;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name = "orders")
 public class order {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String number;
 	private Date creationDate;
 	private Date receivedDate;
+	
 	private double total;
 	
+	@ManyToOne
+	private user user;
+	
+	@OneToOne(mappedBy = "order")
+	private orderDetail detail;
+	
 	public order() {
-		// TODO Auto-generated constructor stub
 	}
 
 	public order(Integer id, String number, Date creationDate, Date receivedDate, double total) {
@@ -60,6 +78,25 @@ public class order {
 
 	public void setTotal(double total) {
 		this.total = total;
+	}
+	
+	
+
+	public user getUser() {
+		return user;
+	}
+
+	public void setUser(user user) {
+		this.user = user;
+	}
+
+	
+	public orderDetail getDetail() {
+		return detail;
+	}
+
+	public void setDetail(orderDetail detail) {
+		this.detail = detail;
 	}
 
 	@Override

@@ -1,6 +1,17 @@
 package com.proyecto.ecommerce.model;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name = "products")
 public class product {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String name;
 	private String description;
@@ -8,11 +19,14 @@ public class product {
 	private double price;
 	private int quantity;
 	
+	@ManyToOne
+	private user user;
+		
 	public product() {
-		// TODO Auto-generated constructor stub
 	}
 
-	public product(Integer id, String name, String description, String image, double price, int quantity) {
+	public product(Integer id, String name, String description, String image, double price, int quantity,
+			com.proyecto.ecommerce.model.user user) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -20,6 +34,7 @@ public class product {
 		this.image = image;
 		this.price = price;
 		this.quantity = quantity;
+		this.user = user;
 	}
 
 	public Integer getId() {
@@ -67,6 +82,46 @@ public class product {
 	}
 
 	public void setquantity(int quantity) {
+		this.quantity = quantity;
+	}
+
+	public user getUser() {
+		return user;
+	}
+
+	public void setUser(user user) {
+		this.user = user;
+	}
+	
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getImage() {
+		return image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
+	}
+
+	public double getPrice() {
+		return price;
+	}
+
+	public void setPrice(double price) {
+		this.price = price;
+	}
+
+	public int getQuantity() {
+		return quantity;
+	}
+
+	public void setQuantity(int quantity) {
 		this.quantity = quantity;
 	}
 
